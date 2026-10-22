@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="La alcancía de la Tribu Sin Guía: cada viajero abona y avanza hacia su meta."
+    />
+    <meta property="og:title" content="Ahorritos Tribu Sin Guía" />
+    <meta
+      property="og:description"
+      content="Abona y mira a tu viajero avanzar hacia la cima."
+    />
+    <meta name="theme-color" content="#f6ebd4" />
+    <title>Ahorritos Tribu Sin Guía</title>
+    <link rel="icon" type="image/png" href="hiker.png" />
+    <style>
+      :root {
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      body {
+        margin: 0;
+      }
+      img {
+        max-width: 100%;
+      }
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;800;900&family=Jost:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <div class="wrap">
+      <header class="brand">
+        <img src="hiker.png" alt="" />
+        <div class="word">TRIBU<br />SIN GUÍA</div>
+        <div class="sub">
+          Ahorritos para el próximo viaje
+          <span class="admin-tag" id="adminTag" hidden>Administrador</span>
+        </div>
+      </header>
+
+      <div class="demo" id="status" hidden></div>
+
+      <div class="chips" id="chips" role="group" aria-label="Viajeros"></div>
+
+      <section class="main">
+        <div class="scene-card">
+          <div class="stats">
+            <h1 class="who" id="who">—</h1>
+            <span class="amt num" id="amt">$ 0</span>
+            <span class="of num" id="of">de $ 1.000.000</span>
+            <span class="falta num" id="falta"></span>
+          </div>
+          <div class="scene" id="scene">
+            <svg viewBox="0 0 800 440" role="img" aria-labelledby="sceneTitle">
+              <title id="sceneTitle">Sendero hacia la meta</title>
+              <rect width="800" height="440" fill="#efe1c2" />
+              <defs>
+                <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feMorphology
+                    in="SourceAlpha"
+                    operator="dilate"
+                    radius="2.5"
+                    result="d"
+                  />
+                  <feFlood flood-color="#f6ebd4" />
+                  <feComposite in2="d" operator="in" result="o" />
+                  <feMerge>
+                    <feMergeNode in="o" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="170" cy="96" r="44" fill="#e7b98f" />
+              <path
+                d="M0 300 L120 210 L210 260 L330 150 L430 230 L520 120 L640 40 L720 110 L800 70 L800 440 L0 440Z"
+                fill="#1b4f4b"
+                opacity=".45"
+              />
+              <path
+                d="M0 360 L90 290 L180 330 L300 240 L390 300 L480 210 L560 160 L640 80 L700 130 L760 100 L800 130 L800 440 L0 440Z"
+                fill="#1b4f4b"
+              />
+              <path
+                d="M604 112 L640 80 L676 112 L660 108 L648 118 L636 106 L620 116Z"
+                fill="#f6ebd4"
+                opacity=".85"
+              />
+              <path
+                d="M0 400 L140 350 L260 380 L420 330 L560 360 L700 320 L800 340 L800 440 L0 440Z"
+                fill="#012e29"
+              />
+              <path
+                id="trail"
+                d="M40 418 C 160 410, 150 360, 250 352 S 390 330, 400 290 S 450 240, 500 225 S 560 190, 560 165 S 610 110, 640 82"
+                fill="none"
+                stroke="#e5d3ad"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-dasharray="2 12"
+              />
+              <path
+                id="trailDone"
+                d="M40 418 C 160 410, 150 360, 250 352 S 390 330, 400 290 S 450 240, 500 225 S 560 190, 560 165 S 610 110, 640 82"
+                fill="none"
+                stroke="#a54d17"
+                stroke-width="6"
+                stroke-linecap="round"
+              />
+              <g id="camps"></g>
+              <g id="flag">
+                <line
+                  x1="640"
+                  y1="82"
+                  x2="640"
+                  y2="34"
+                  stroke="#f6ebd4"
+                  stroke-width="3"
+                />
+                <path d="M641 34 L676 44 L641 54Z" fill="#a54d17" />
+              </g>
+              <text
+                x="684"
+                y="30"
+                fill="#012e29"
+                font-family="Bitter, Georgia, serif"
+                font-weight="800"
+                font-size="16"
+                id="goalLabel"
+              >
+                Meta
+              </text>
+              <image
+                id="hiker"
+                href="hiker.png"
+                width="78"
+                height="86"
+                x="0"
+                y="0"
+                filter="url(#glow)"
+              />
+            </svg>
+            <div class="pct-badge num" id="pct">0%</div>
+            <div class="summit-msg" id="summit" hidden>
+              ¡Llegaste a la cima! Meta cumplida.
+            </div>
+          </div>
+        </div>
+
+        <form class="panel" id="abonoForm" novalidate>
+          <div>
+            <div class="eyebrow">Nuevo abono</div>
+            <h2>Meter plata</h2>
+          </div>
+          <label for="abonoPersona"
+            >¿Quién abona?
+            <select id="abonoPersona"></select>
+          </label>
+          <label for="abonoMonto"
+            >¿Cuánto?
+            <div class="money">
+              <span>$</span
+              ><input
+                id="abonoMonto"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="50.000"
+              />
+            </div>
+          </label>
+          <div class="quick" aria-label="Montos rápidos">
+            <button type="button" data-q="20000">$ 20.000</button>
+            <button type="button" data-q="50000">$ 50.000</button>
+            <button type="button" data-q="100000">$ 100.000</button>
+            <button type="button" data-q="200000">$ 200.000</button>
+          </div>
+          <label for="abonoNota"
+            >Nota (opcional)
+            <input
+              id="abonoNota"
+              maxlength="60"
+              placeholder="Quincena, venta de rifas…"
+            />
+          </label>
+          <button class="btn" type="submit">Abonar y avanzar</button>
+          <div class="msg" id="abonoMsg" role="status"></div>
+        </form>
+      </section>
+
+      <section style="display: grid; gap: 14px">
+        <div class="section-head">
+          <h2>La tribu</h2>
+          <p>Cada viajero camina hacia su propia meta.</p>
+        </div>
+        <div class="tribe" id="tribe"></div>
+      </section>
+
+      <section style="display: grid; gap: 10px">
+        <div class="section-head">
+          <h2>Abonos de <span id="histWho">—</span></h2>
+        </div>
+        <ul class="hist" id="hist"></ul>
+        <div>
+          <button
+            class="linkbtn danger"
+            id="removePerson"
+            type="button"
+            hidden
+          ></button>
+        </div>
+        <div class="remove-confirm" id="removeConfirm" hidden>
+          <span id="removeText"></span>
+          <button class="btn danger" id="removeYes" type="button">
+            Sí, quitar
+          </button>
+          <button class="btn ghost" id="removeNo" type="button">
+            Cancelar
+          </button>
+        </div>
+      </section>
+      <footer class="foot">
+        <button class="linkbtn" id="adminBtn" type="button">
+          Entrar como administrador
+        </button>
+      </footer>
+    </div>
+
+    <dialog id="personDlg">
+      <form id="personForm" method="dialog" novalidate>
+        <div>
+          <div class="eyebrow">Nuevo viajero</div>
+          <h2>Sumar a la tribu</h2>
+        </div>
+        <label for="pNombre"
+          >Nombre
+          <input
+            id="pNombre"
+            maxlength="30"
+            required
+            placeholder="Ej. Camila"
+          />
+        </label>
+        <label for="pMeta"
+          >Meta
+          <div class="money">
+            <span>$</span
+            ><input id="pMeta" inputmode="numeric" value="1.000.000" />
+          </div>
+        </label>
+        <div class="msg err" id="pMsg" role="status"></div>
+        <div class="dlg-actions">
+          <button class="btn ghost" type="button" id="pCancel">Cancelar</button>
+          <button class="btn secondary" type="submit">Agregar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="adminDlg">
+      <form id="adminForm" method="dialog" novalidate>
+        <div>
+          <div class="eyebrow">Administrador</div>
+          <h2>Entrar con clave</h2>
+        </div>
+        <label for="aClave"
+          >Clave de administrador
+          <input id="aClave" type="password" autocomplete="current-password" />
+        </label>
+        <div class="msg err" id="aMsg" role="status"></div>
+        <div class="dlg-actions">
+          <button class="btn ghost" type="button" id="aCancel">Cancelar</button>
+          <button class="btn secondary" type="submit">Entrar</button>
+        </div>
+      </form>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
